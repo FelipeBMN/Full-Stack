@@ -1,0 +1,74 @@
+@btn {}
+
+.button_btn {
+  font-weight: bold;
+  border: 0;
+}
+
+table {
+  .thid {
+    margin-left: 8px;
+  }
+  .t-head{
+    background-color: RGBA(33,37,41,var(--bs-bg-opacit,1))!important;
+    color: white;
+  }
+  thead {
+    th {
+      vertical-align: middle;
+    }
+
+    th:first-child {
+      border-radius: 10px 0 0 0;
+    }
+
+    th:last-child {
+      border-radius: 0 10px 0 0;
+    }
+  }
+
+  tbody {
+    tr:last-child{
+
+
+      th:first-child {
+        margin-left: 10px;
+        border-radius: 0 0 0 10px;
+      }
+
+      th:last-child {
+        border-radius: 0 0 10px 0;
+      }
+    }
+  }
+
+  img {
+    margin-left: 15%;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.local {
+  max-width: 300px;
+}
+
+.options {
+  button {
+    margin-right: 5px;
+  }
+}
+
+.btn{
+  margin-left: 5px;
+}
+
+.modal-content {
+  margin-top: 20px;
+}
+

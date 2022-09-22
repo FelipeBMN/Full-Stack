@@ -1,0 +1,83 @@
+<div class="card rounded shadow-sm p-3">
+
+  <!-- Filtro -->
+  <div class="d-flex">
+    <div class="flex-fill mb-2">
+      <div class="input-group mb-2" style="padding-right:5px;">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Filtro:</label>
+        </div>
+        <input type="email" class="form-control" [(ngModel)]="filtroLista" placeholder="Busca">
+      </div>
+    </div>
+    <div class="d-flex">
+      <a style="height:38px " routerLink="/eventos/detalhe" class="d-flex btn btn-outline-primary mb-2" href="#">
+        <i class="fa fa-plus-circle my-1 mx-1"></i>
+        <p class="ml-1 d-none d-sm-block">novo</p>
+      </a>
+    </div>
+  </div>
+
+
+  <!-- Tabela -->
+  <table class="table table-striped table-hover">
+    <thead class="t-head">
+      <tr>
+        <th><span class="thid">ID</span></th>
+        <th class="d-none d-md-table-cell">
+          <button class=" btn btn-outline-light button_btn" (click)="imgViewer()">
+            <i class="{{mostrarImg ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i>
+            {{mostrarImg ? "Ocultar" : "Mostrar"}}
+          </button>
+        </th>
+        <th>Tema</th>
+        <th class="d-none d-md-table-cell">Local</th>
+        <th>Data</th>
+        <th class="d-none d-md-table-cell">N° Participantes</th>
+        <th class="d-none d-md-table-cell">Lote</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="eventos && eventos.length">
+      <tr *ngFor="let evento of eventosFiltrados" (click)="detalheEvento(evento.id)" style="cursor:pointer;">
+        <th class="thid"><span class="thid">{{evento.id}}</span></th>
+        <th class="thImg d-none d-md-table-cell">
+          <!-- [style.margin.px]="margemImg" -->
+          <img class="align-center" src="/assets/{{evento.imagemURL}}" [collapse]="!mostrarImg" [isAnimated]="true"
+            [style.width.px]="larguraImg">
+        </th>
+        <th>{{evento.tema}}</th>
+        <th class="local d-none d-md-table-cell">{{evento.local}}</th>
+        <th>{{evento.dataEvent | DateTimeFormat}}</th>
+        <th class="d-none d-md-table-cell">{{evento.quantidade}}</th>
+        <th class="lote d-none d-md-table-cell">{{evento.lotes[0].nome}}°</th>
+        <th class="options">
+          <div class="btn-group">
+            <button type="button" class="btn btn-danger btn-md " (click)="openModal(template)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </th>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="!eventos.length">
+      <tr>
+        <td colspan="8" class="text-center">
+          <h4>Nenhum evento encontrado!</h4>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+
+</div>
+
+
+<!-- {{eventos | json}} -->
+
+<ng-template #template style="top: 25%;">
+  <div class="modal-body text-center">
+    <p> Tem certeza que deseja deletar esse evento?</p>
+    <button type="button" class="btn btn-danger" (click)="confirm()">Sim</button>
+    <button type="button" class="btn btn-success" (click)="decline()">Não</button>
+  </div>
+</ng-template>

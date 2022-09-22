@@ -1,0 +1,40 @@
+<app-nav></app-nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.5)" type="none">
+  <div class="c-loader"></div>
+  <style>
+
+    body {
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      transform: scale(5);
+    }
+
+    .carregando {
+      font-size: 30px;
+      color: white;
+    }
+
+    .c-loader {
+      margin-top:-100px;
+      animation: is-rotating 1s infinite;
+      border: 6px solid #e5e5e5;
+      border-radius: 50%;
+      border-top-color: #51d4db;
+      height: 50px;
+      width: 50px;
+    }
+
+    @keyframes is-rotating {
+      to {
+        transform: rotate(1turn);
+      }
+    }
+  </style>
+</ngx-spinner>

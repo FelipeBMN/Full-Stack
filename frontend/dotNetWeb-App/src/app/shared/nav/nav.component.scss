@@ -1,0 +1,44 @@
+.logo {
+  height: 31px;
+  filter: invert(1);
+}
+
+.navbar {
+  margin-bottom: 20px;
+  background-color: RGBA(33, 37, 41, var(--bs-bg-opacit, 1)) !important;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.dropdown-item {
+  font-size: 1.2rem;
+  color: black;
+}
+
+.dropdown-toggle {
+  color: white !important;
+}
+
+.nav-link {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.navbar-nav:not(.login) {
+  width: 100%;
+}
+
+// Coloca o menu dropdown no lugar correto
+@media (min-width: 991px) {
+  .dropdown-menu {
+    left: -65px;
+  }
+}
+
+.active .nav-link {
+  color: rgb(255, 255, 255);
+}

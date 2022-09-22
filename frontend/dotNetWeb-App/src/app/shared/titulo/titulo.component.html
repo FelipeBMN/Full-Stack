@@ -1,0 +1,17 @@
+
+<div class="title d-flex align-items-center  p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
+  <div class="d-flex align-items-center justify-content-left mr-auto">
+    <i class="{{iconClass}}"></i>
+    <div class="lh-100">
+      <h3 class="mb-0 text-white lh-100">{{title}}</h3>
+      <small>{{subtitle}}</small>
+    </div>
+  </div>
+  <div class="ms-auto p-1" *ngIf="buttonList">
+    <button class="btn btn-outline-light" (click)="button(title)">
+      Listar {{title}}
+    </button>
+  </div>
+
+  <hr>
+</div>

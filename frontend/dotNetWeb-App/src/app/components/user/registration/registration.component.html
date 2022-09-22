@@ -1,0 +1,111 @@
+<div class="card shadow-sm ">
+  <div class="row p-5">
+    <div class="col-md-6 d-none d-md-block" style="height: 450px;">
+      <div class="text-center col-md-12 my-auto side-heder">
+        <h1>Formularia de Cadastro</h1>
+        <hr>
+        <img src="assets/cadastroImg.jpg" class="mt-2  " alt="" width="400px">
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <form class="p-1 " [formGroup]="form">
+        <div class="pb-2 d-block d-md-none">
+          <h3 class="title border-bottom">Cadastro de Usuário</h3>
+        </div>
+        <div class="form d-flex">
+          <div class="form-group col-sm-6" style="margin-right: 20px;">
+            <label>Primeiro Nome</label>
+            <input type="text" class="form-control" [ngClass]="{'is-invalid': f.p_nome.errors && f.p_nome.touched }" formControlName="p_nome" placeholder="Insira o Primeiro nome" />
+            <div *ngIf="f.p_nome.errors?.required" class="invalid-feedback">
+              Preencha o primeiro nome
+            </div>
+            <div *ngIf="f.p_nome.errors?.minlength || f.p_nome.errors?.maxlength" class="invalid-feedback">
+              Nome incorreto
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
+            <label>Último nome</label>
+            <input type="text" class="form-control" [ngClass]="{'is-invalid': f.u_nome.errors && f.u_nome.touched }" formControlName="u_nome" placeholder="Insira o Último nome" />
+            <div *ngIf="f.u_nome.errors?.required" class="invalid-feedback">
+              Preencha o último nome
+            </div>
+            <div *ngIf="f.u_nome.errors?.minlength || f.u_nome.errors?.maxlength" class="invalid-feedback">
+              Nome incorreto
+            </div>
+          </div>
+        </div>
+        <div class="form-group" style="margin-right: -20px;">
+          <label for="">E-mail:</label>
+          <input class="form-control" type="text" [ngClass]="{'is-invalid': f.email.errors && f.email.touched }" formControlName="email" placeholder="Insira o Nome Completo" />
+          <div *ngIf="f.email.errors?.required" class="invalid-feedback">
+            Preencha com o seu e-mail
+          </div>
+          <div *ngIf="f.email.errors?.email" class="invalid-feedback">
+            E-mail invalido
+          </div>
+        </div>
+        <div class="form-group" style="margin-right: -20px;">
+          <label for="">Usuário:</label>
+          <input class="form-control" type="text" [ngClass]="{'is-invalid': f.usuario.errors && f.usuario.touched }" formControlName="usuario" placeholder="Insira o nome de Usuário" />
+          <div *ngIf="f.usuario.errors?.required" class="invalid-feedback">
+            Preencha o nome de usuário
+          </div>
+          <div *ngIf="f.usuario.errors?.minlength" class="invalid-feedback">
+            Nome de usuário muito curta
+          </div>
+          <div *ngIf="f.usuario.errors?.maxlength" class="invalid-feedback">
+            Nome usuário muito longa
+          </div>
+        </div>
+        <div class="form d-flex">
+          <div class="form-group col-sm-6" style="margin-right: 20px;">
+            <label for="">Senha:</label>
+            <input class="form-control" type="password" [ngClass]="{'is-invalid': f.senha.errors && f.senha.touched }" formControlName="senha" placeholder="Digite uma Senha" />
+            <div *ngIf="f.senha.errors?.required" class="invalid-feedback">
+              Preencha a senha
+            </div>
+            <div *ngIf="f.senha.errors?.pattern" class="invalid-feedback">
+              Senha deve conter, letras maiúsculas e minúsculas, caracteres especiais e números
+            </div>
+            <div *ngIf="f.senha.errors?.minlength" class="invalid-feedback">
+              Senha muito curta
+            </div>
+            <div *ngIf="f.senha.errors?.maxlength" class="invalid-feedback">
+              Senha muito longa
+            </div>
+
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="">Confirmar Senha:</label>
+            <input class="form-control" type="password" [ngClass]="{'is-invalid': f.c_senha.errors && f.c_senha.touched }" formControlName="c_senha" placeholder="Confirme a Senha" />
+            <div class="invalid-feedback">
+              Senhas não são iguais
+            </div>
+          </div>
+        </div>
+        <div class="form-row p-1 mb-3">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="form-check-input" style="margin-top:24px; margin-right:10px;" id="customCheck1">
+            <label class="custom-control-label">Eu concordo com os <a href="#">Termos de Uso</a>.</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-12">
+            <button class="btn btn-lg btn-success btn-block px-5">
+              Registar
+            </button>
+          </div>
+        </div>
+        <div class="form-row d-flex flex-row-reverse">
+          <div class="form-group mt-2 col-4" style="margin-right:-30px;">
+            <a class="btn btn-link btn-block">
+              Já sou Cadastrado
+            </a>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

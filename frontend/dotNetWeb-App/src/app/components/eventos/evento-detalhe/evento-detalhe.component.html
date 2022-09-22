@@ -1,0 +1,92 @@
+<div class="card rounded shadow-sm p-3">
+  <form [formGroup]="form">
+    <!-- <p> Form value: {{form.value | json}}</p> -->
+    <!-- <p> Form value: {{form.status | json}}</p> -->
+    <div class="p-3">
+      <div class="row">
+        <div class="form-group col-lg-12">
+          <label>Tema</label>
+          <input type="text" class="form-control" formControlName="tema" [ngClass]="{'is-invalid':f.tema.errors && f.tema.touched}" placeholder="Tema do evento">
+          <div *ngIf="f.tema.errors?.required" class="invalid-feedback" >
+            Tema é obrigatório
+          </div>
+          <div *ngIf="f.tema.errors?.minlength" class="invalid-feedback" >
+            Mínimo de 4 caracteres.
+          </div>
+          <div *ngIf="f.tema.errors?.maxlength" class="invalid-feedback" >
+            Máximo de 50 caracteres.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-lg-8">
+          <label>Local</label>
+          <input type="text" class="form-control" [ngClass]="{'is-invalid':f.local.errors && f.local.touched}" formControlName="local" placeholder="">
+          <div class="invalid-feedback">
+            Local é obrigatório
+          </div>
+        </div>
+
+        <div class="form-group col-lg-4">
+          <label>Data e Hora</label>
+          <input type="datetime" class="form-control" [ngClass]="{'is-invalid':f.dataEvento.errors && f.dataEvento.touched}" formControlName="dataEvento" placeholder="00/00/00 00:00">
+          <div class="invalid-feedback">
+            Data é hora é obrigatório
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-lg-2">
+          <label>Quantidade Pessoas</label>
+          <input type="number" class="form-control" [ngClass]="{'is-invalid':f.quantidade.errors && f.quantidade.touched}" formControlName="quantidade" placeholder="00000">
+          <div *ngIf="f.quantidade.errors?.required" class="invalid-feedback">
+            Quantidade de pessoas é obrigatório
+          </div>
+          <div *ngIf="f.quantidade.erros?.max" class="invalid-feedback">
+            Quantidade máxima de 10000000
+          </div>
+        </div>
+
+        <div class="form-group col-lg-2">
+          <label>Telefone</label>
+          <input type="text" class="form-control" [ngClass]="{'is-invalid':f.telefone.errors && f.telefone.touched}" formControlName="telefone" placeholder="(000) 90000-0000">
+          <div *ngIf="f.telefone.errors?.required" class="invalid-feedback">
+            Telefone é obrigatório
+          </div>
+        </div>
+
+        <div class="form-group col-lg-4">
+          <label>E-mail</label>
+          <input type="text" class="form-control" [ngClass]="{'is-invalid':f.email.errors && f.email.touched}" formControlName="email" placeholder="E-mail">
+          <div *ngIf="f.email.errors?.required" class="invalid-feedback">
+            E-mail é obrigatório
+          </div>
+          <div *ngIf="f.email.errors?.email" class="invalid-feedback">
+            E-mail invalido
+          </div>
+        </div>
+
+        <div class="form-group col-lg-4">
+          <label>Imagem</label>
+          <input type="text" class="form-control" [ngClass]="{'is-invalid':f.imagemURL.errors && f.imagemURL.touched}" formControlName="imagemURL" placeholder="Imagem">
+          <div *ngIf="f.email.errors?.required" class="invalid-feedback">
+            E-mail é obrigatório
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-outline-danger mr-auto border-sm" (click)="resetForm($event)">
+          Cancelar Alteração
+        </button>
+        <button class="btn btn-success" [disabled]="!form.valid">
+          Salvar Evento
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
