@@ -1,20 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using dotnetWebApi.Domain;
+using dotnetWebApi.Application.Dtos;
 
 namespace dotnetWebApi.Application.Contratos
 {
     public interface IEventService
     {
-        Task<Event> AddEvento(Event model);
-        Task<Event> UpdateEvento(int eventoId,Event model);
+        Task<EventoDto> AddEvento(EventoDto model);
+        Task<EventoDto> UpdateEvento(int eventoId,EventoDto model);
         Task<bool> DeleteEvento(int eventoId);
 
         //Event
-        Task<Event[]> GetAllEventAsync(bool includePalestrantes);
-        Task<Event[]> GetEventByTemaAsync(string tema, bool includePalestrantes);
-        Task<Event> GetEventByIdAsync(int eventId, bool includePalestrantes);
+        Task<EventoDto[]> GetAllEventAsync(bool includePalestrantes);
+        Task<EventoDto[]> GetEventByTemaAsync(string tema, bool includePalestrantes);
+        Task<EventoDto> GetEventByIdAsync(int eventId, bool includePalestrantes);
     }
 }

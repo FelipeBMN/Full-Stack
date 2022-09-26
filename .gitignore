@@ -559,3 +559,7 @@ yarn-error.log*
 # Mac OSX Finder files.
 **/.DS_Store
 .DS_Store
+
+
+# Teste ignorando os .pack
+*.pack

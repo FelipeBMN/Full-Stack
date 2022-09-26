@@ -48,7 +48,8 @@
         </th>
         <th>{{evento.tema}}</th>
         <th class="local d-none d-md-table-cell">{{evento.local}}</th>
-        <th>{{evento.dataEvent | DateTimeFormat}}</th>
+        <!-- | DateTimeFormat -->
+        <th>{{evento.dataEvent}}</th>
         <th class="d-none d-md-table-cell">{{evento.quantidade}}</th>
         <th class="lote d-none d-md-table-cell">{{evento.lotes[0].nome}}°</th>
         <th class="options">

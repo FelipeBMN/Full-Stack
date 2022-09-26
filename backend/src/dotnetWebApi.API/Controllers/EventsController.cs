@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using dotnetWebApi.Domain;
-using Microsoft.AspNetCore.Mvc;
-using dotnetWebApi.Persistence.Contextos;
+﻿using Microsoft.AspNetCore.Mvc;
 using dotnetWebApi.Application.Contratos;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System;
+using dotnetWebApi.Application.Dtos;
 
 namespace dotnetWebApi.API.Controllers
 {
@@ -60,7 +57,7 @@ namespace dotnetWebApi.API.Controllers
             try
             {
                 var evento = await this.eventService.GetEventByIdAsync(tema, true);
-                if (evento == null) return NotFound("Nenhum evento encontrado pelo tema");
+                if (evento == null) return NoContent();
 
                 return Ok(evento);
             }
@@ -71,12 +68,12 @@ namespace dotnetWebApi.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Event model)
+        public async Task<IActionResult> Post(EventoDto model)
         {
             try
             {
                 var evento = await this.eventService.AddEvento(model);
-                if (evento == null) return BadRequest("Erro ao tentar adicionar evento");
+                if (evento == null) return NoContent();
 
                 return Ok(evento);
             }
@@ -87,12 +84,12 @@ namespace dotnetWebApi.API.Controllers
         }
 
         [HttpPut("{id}/update")]
-        public async Task<IActionResult> Put(int id, Event model)
+        public async Task<IActionResult> Put(int id, EventoDto model)
         {
             try
             {
                 var evento = await this.eventService.UpdateEvento(id, model);
-                if (evento == null) return BadRequest("Erro ao tentar atualizar evento");
+                if (evento == null) return NoContent();
 
                 return Ok(evento);
             }
@@ -107,7 +104,7 @@ namespace dotnetWebApi.API.Controllers
         {
             try
             {
-                return await this.eventService.DeleteEvento(id) ?  Ok("Deletado") :  BadRequest("Não Deletado");  
+                return await this.eventService.DeleteEvento(id) ? Ok("Deletado") : BadRequest("Não Deletado");
             }
             catch (Exception ex)
             {

@@ -45,7 +45,7 @@ export class EventoDetalheComponent implements OnInit {
                   Validators.maxLength(50)]],
     local: ['', Validators.required],
     dataEvento: ['', Validators.required],
-    quantidade: ['', [Validators.required, Validators.max(10000000)]],
+    quantidade: ['3', [Validators.required, Validators.max(10000000), Validators.min(3)]],
     telefone: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     imagemURL: ['', Validators.required],

@@ -44,8 +44,11 @@
           <div *ngIf="f.quantidade.errors?.required" class="invalid-feedback">
             Quantidade de pessoas é obrigatório
           </div>
-          <div *ngIf="f.quantidade.erros?.max" class="invalid-feedback">
-            Quantidade máxima de 10000000
+          <div *ngIf="f.quantidade.errors?.max" class="invalid-feedback">
+            Quantidade máxima de 10000000 participantes
+          </div>
+          <div *ngIf="f.quantidade.errors?.min" class="invalid-feedback">
+            Quantidade Mínima de 3 participantes
           </div>
         </div>
 
