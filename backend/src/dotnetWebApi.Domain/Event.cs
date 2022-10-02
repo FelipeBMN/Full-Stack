@@ -1,12 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace dotnetWebApi.Domain
 {
+    // Alterando nome das variáveis no banco de dados.
+    [Table("EventosDetalhes")]
     public class Event
     {
+        [Key]
         public int Id { get; set; }
         public string Local { get; set; }
         public DateTime? DataEvent { get; set; }
