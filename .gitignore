@@ -563,3 +563,4 @@ yarn-error.log*
 
 # Teste ignorando os .pack
 *.pack
+**/cache/**

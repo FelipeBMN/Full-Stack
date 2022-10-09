@@ -83,13 +83,13 @@ namespace dotnetWebApi.API.Controllers
             }
         }
 
-        [HttpPut("{id}/update")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, EventoDto model)
         {
             try
             {
                 var evento = await this.eventService.UpdateEvento(id, model);
-                if (evento == null) return NoContent();
+                if (evento == null) return NoContent(); 
 
                 return Ok(evento);
             }
@@ -99,12 +99,14 @@ namespace dotnetWebApi.API.Controllers
             }
         }
 
-        [HttpDelete("{id}/delete")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                return await this.eventService.DeleteEvento(id) ? Ok("Deletado") : BadRequest("Não Deletado");
+                return await this.eventService.DeleteEvento(id) 
+                ? Ok(new{ message = "Deletado"}) 
+                : BadRequest("Não Deletado");
             }
             catch (Exception ex)
             {

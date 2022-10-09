@@ -18,6 +18,7 @@ export class EventoListaComponent implements OnInit {
 
   public eventos: Evento[] = [];
   public eventosFiltrados: Evento[] = [];
+  public eventoId = 0;
 
   public larguraImg: number = 100;
   public mostrarImg: boolean = true;
@@ -31,7 +32,7 @@ export class EventoListaComponent implements OnInit {
               ) { }
 
   public ngOnInit(): void {
-    this.getEventos();
+    this.carregarEventos();
     this.spinner.show();
   }
 
@@ -56,14 +57,13 @@ export class EventoListaComponent implements OnInit {
     )
   }
 
-  public getEventos(): void {
+  public carregarEventos(): void {
     this.eventoService.getEventos().subscribe({
-
       next: (eventos: Evento[]) => {
         this.eventos = eventos
         this.eventosFiltrados = this.eventos
       },
-      error: (error: any) => {
+      error: (_error: any) => {
         this.spinner.hide();
         this.toastr.error('Erro ao carregar eventos!','Erro')
       },
@@ -71,14 +71,33 @@ export class EventoListaComponent implements OnInit {
     });
   }
 
-  openModal(template: TemplateRef<any>) {
+  openModal(event: any, template: TemplateRef<any>, eventoId: number): void {
+    event.stopPropagation();
+    this.eventoId = eventoId;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
   confirm(): void {
-    this.message = 'Confirmed!';
     this.modalRef?.hide();
-    this.toastr.success('Deletado','Evento deletado com Sucesso')
+    this.spinner.show();
+
+    this.eventoService.deleteEvento(this.eventoId).subscribe({
+      next:(result: any)=>{
+        this.toastr.success('Deletado','Evento deletado com Sucesso');
+        this.spinner.hide();
+        console.log('evento deletado');
+        this.carregarEventos();
+      },
+      error:(error)=>{
+        this.toastr.error(`Erro ao tentar deletar evento ${this.eventoId}`, 'Erro')
+        this.spinner.hide();
+        this.carregarEventos();
+      },
+      complete:()=>{this.spinner.hide();this.carregarEventos();}
+    } );
+
+    this.message = 'Confirmed!';
+
   }
 
   decline(): void {

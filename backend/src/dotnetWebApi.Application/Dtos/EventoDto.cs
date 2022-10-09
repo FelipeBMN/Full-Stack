@@ -20,7 +20,7 @@ namespace dotnetWebApi.Application.Dtos
         [Required(ErrorMessage="O {0} deve ser valido.")]
         //[MinLength(3)]
         //[MaxLength(16)]
-        [StringLength(16, MinimumLength = 3)]
+        [StringLength(50, MinimumLength = 3)]
         public string Tema { get; set; }
 
         [Required(ErrorMessage="O {0} deve ser valido.")]

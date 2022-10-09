@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
+import { Evento } from '@app/model/Evento';
+import { EventoService } from '@app/services/evento.service';
+
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-evento-detalhe',
   templateUrl: './evento-detalhe.component.html',
@@ -8,17 +15,30 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class EventoDetalheComponent implements OnInit {
 
-  form = new FormGroup({
-    tema: new FormControl(),
-    local: new FormControl(),
-    dataEvento: new FormControl(),
-    quantidade: new FormControl(),
-    telefone: new FormControl(),
-    email: new FormControl(),
-    imagemURL: new FormControl(),
-  });
+  constructor(
+    private fb: FormBuilder,
+    private localeService: BsLocaleService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private eventoService: EventoService,
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService,
+  ) {
+    this.localeService.use('pt-br');
+  }
 
-  get f(): any{
+  ngOnInit(): void {
+    this.validation();
+    this.carregarEvento();
+  }
+
+  form!: FormGroup;
+  evento = {} as Evento;
+  mode = 'post';
+  titleDetalhe = 'Criando Novo Evento';
+
+
+  get f(): any {
     return this.form.controls;
   }
 
@@ -28,27 +48,85 @@ export class EventoDetalheComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.form.invalid){
+    if (this.form.invalid) {
       return
     }
   }
 
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.validation();
+  public validation(): void {
+    this.form = this.fb.group({
+      tema: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]),
+      local: new FormControl('', Validators.required),
+      dataEvent: new FormControl('', Validators.required),
+      quantidade: new FormControl('3', [Validators.required, Validators.max(10000000), Validators.min(3)]),
+      telefone: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      imagemURL: new FormControl('', Validators.required),
+    })
   }
 
-  public validation(): void{
-    this.form = this.fb.group({
-    tema: ['', [Validators.required, Validators.minLength(4),
-                  Validators.maxLength(50)]],
-    local: ['', Validators.required],
-    dataEvento: ['', Validators.required],
-    quantidade: ['3', [Validators.required, Validators.max(10000000), Validators.min(3)]],
-    telefone: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    imagemURL: ['', Validators.required],
-    })
+  public cssValidator(formCampo: FormControl): any {
+    return { 'is-invalid': formCampo.errors && formCampo.touched };
+  }
+
+  get bsConfig(): any {
+    return {
+      adaptivePosition: true,
+      isAnimated: true,
+      containerClass: 'theme-default',
+      showWeekNumbers: false,
+      dateInputFormat: 'DD-MM-YYYY hh:mm a'
+    }
+  }
+
+  //pegando dados do formulário de acordo com o id passado
+
+  public carregarEvento(): void {
+    const eventoIdParameter = this.route.snapshot.paramMap.get('id');
+
+    if (eventoIdParameter !== null) {
+      this.titleDetalhe = `Editando Evento ${eventoIdParameter}`;
+      this.spinner.show();
+      this.mode = 'put';
+      this.eventoService.getEventoById(+eventoIdParameter).subscribe({
+
+        next: (evento: Evento) => {
+          this.evento = { ...evento }; // Spread ... copia os atributos
+          this.form.patchValue(this.evento); //Atualiza os valores do formulario
+        },
+        error: (error: any) => {
+          console.log(error);
+          this.toastr.error('Erro ao tentar carregar evento');
+        }
+      }
+      ).add(()=>{this.spinner.hide();});
+    }
+  }
+
+  public salvarAlteracao(): void {
+    this.spinner.show();
+    if (this.form.valid) {
+
+      this.evento = (this.mode === 'post')
+                  ? this.evento = { ...this.form.value }
+                  : this.evento = { id: this.evento.id, ...this.form.value };
+
+      this.eventoService[this.mode](this.evento).subscribe(
+
+        () => {
+          this.toastr.success('Evento atualizado com sucesso');
+          this.router.navigate(['/eventos/lista']);
+        },
+        (error: any) => {
+          console.log(error);
+          this.toastr.error('Erro ao atualizar evento', 'Erro');
+          this.spinner.hide();
+        },
+        () => {
+          this.spinner.hide();
+        }
+      );
+
+    }
   }
 }

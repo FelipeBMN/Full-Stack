@@ -16,3 +16,7 @@ Criando Projeto:
 
 Criando componente e refenreciando no App.module:
     ng g c [caminho do componente] --module app
+
+Swagger:
+
+    https://localhost:5001/swagger/index.html

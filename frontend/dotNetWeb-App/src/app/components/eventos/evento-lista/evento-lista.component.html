@@ -25,7 +25,7 @@
       <tr>
         <th><span class="thid">ID</span></th>
         <th class="d-none d-md-table-cell">
-          <button class=" btn btn-outline-light button_btn" (click)="imgViewer()">
+          <button class=" btn btn-outline-dark button_btn btn-ocultar" (click)="imgViewer()">
             <i class="{{mostrarImg ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i>
             {{mostrarImg ? "Ocultar" : "Mostrar"}}
           </button>
@@ -48,13 +48,13 @@
         </th>
         <th>{{evento.tema}}</th>
         <th class="local d-none d-md-table-cell">{{evento.local}}</th>
-        <!-- | DateTimeFormat -->
-        <th>{{evento.dataEvent}}</th>
+        <!-- -->
+        <th>{{evento.dataEvent | DateTimeFormat }}</th>
         <th class="d-none d-md-table-cell">{{evento.quantidade}}</th>
-        <th class="lote d-none d-md-table-cell">{{evento.lotes[0].nome}}°</th>
+        <th class="lote d-none d-md-table-cell">{{evento.lotes[0]?.nome | uppercase}}</th>
         <th class="options">
           <div class="btn-group">
-            <button type="button" class="btn btn-danger btn-md " (click)="openModal(template)">
+            <button type="button" class="btn btn-danger btn-md " (click)="openModal($event, template, evento.id)">
               <i class="fa fa-trash"></i>
             </button>
           </div>
@@ -77,7 +77,7 @@
 
 <ng-template #template style="top: 25%;">
   <div class="modal-body text-center">
-    <p> Tem certeza que deseja deletar esse evento?</p>
+    <p> Tem certeza que deseja deletar o evento {{this.eventoId}}?</p>
     <button type="button" class="btn btn-danger" (click)="confirm()">Sim</button>
     <button type="button" class="btn btn-success" (click)="decline()">Não</button>
   </div>

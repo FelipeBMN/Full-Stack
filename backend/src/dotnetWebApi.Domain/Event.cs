@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace dotnetWebApi.Domain
 {
     // Alterando nome das variáveis no banco de dados.
-    [Table("EventosDetalhes")]
+    //[Table("EventosDetalhes")]
     public class Event
     {
         [Key]

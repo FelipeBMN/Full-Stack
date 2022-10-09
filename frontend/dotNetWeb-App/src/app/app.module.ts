@@ -11,7 +11,7 @@ import { EventoService } from './services/evento.service';
 import { PalestrantesComponent } from './components/palestrantes/palestrantes.component';
 import { EventosComponent } from './components/eventos/eventos.component';
 import { NavComponent } from './shared/nav/nav.component';
-import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
+import { DateTimeFormatPipe } from '@app/helpers/DateTimeFormat.pipe';
 import { TituloComponent } from './shared/titulo/titulo.component';
 import { ContatosComponent } from './components/contatos/contatos.component';
 import { PerfilComponent } from './components/user/perfil/perfil.component';
@@ -28,7 +28,12 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { CollapseModule } from 'ngx-bootstrap/collapse'
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { ptBrLocale } from 'ngx-bootstrap/locale';
+
+defineLocale('pt-br', ptBrLocale);
 
 
 @NgModule({
@@ -61,6 +66,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     TooltipModule,
     ToastrModule.forRoot({ timeOut: 5000, positionClass: 'toast-bottom-right', preventDuplicates: true, progressBar: true}),
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+    BsDatepickerModule.forRoot(),
   ],
   providers: [EventoService],
   bootstrap: [AppComponent],
