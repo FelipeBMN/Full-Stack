@@ -35,10 +35,15 @@ namespace dotnetWebApi.API
                 x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-            services.AddScoped<IEventService, EventService>();
+            // Injetando dependências 
             services.AddScoped<IGeralPersist, GeralPersist>();
+            
+            services.AddScoped<IEventService, EventService>();
             services.AddScoped<IEventPersist, EventPersist>();
+
+            services.AddScoped<ILoteService, LoteService>();
+            services.AddScoped<ILotePersist, LotePersist>();
+
             services.AddCors();
             services.AddSwaggerGen(c =>
             {

@@ -5,9 +5,11 @@ import { HttpClientModule } from "@angular/common/http"
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes } from '@angular/router';
 
+import { EventoService } from './services/evento.service';
+import { LoteService } from './services/lote.service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EventoService } from './services/evento.service';
 import { PalestrantesComponent } from './components/palestrantes/palestrantes.component';
 import { EventosComponent } from './components/eventos/eventos.component';
 import { NavComponent } from './shared/nav/nav.component';
@@ -68,7 +70,10 @@ defineLocale('pt-br', ptBrLocale);
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
     BsDatepickerModule.forRoot(),
   ],
-  providers: [EventoService],
+  providers: [
+    EventoService,
+    LoteService
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

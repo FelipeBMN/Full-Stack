@@ -104,6 +104,9 @@ namespace dotnetWebApi.API.Controllers
         {
             try
             {
+                var evento = await eventService.GetEventByIdAsync(id, true);
+                if(evento == null) return NoContent();
+
                 return await this.eventService.DeleteEvento(id) 
                 ? Ok(new{ message = "Deletado"}) 
                 : BadRequest("Não Deletado");

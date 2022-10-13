@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Evento } from '@app/model/Evento';
 import { EventoService } from '@app/services/evento.service';
+import { Lote } from '@app/model/Lote';
 
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -42,6 +43,20 @@ export class EventoDetalheComponent implements OnInit {
     return this.form.controls;
   }
 
+  get lotes(): FormArray{
+    return this.form.get('lotes') as FormArray
+  }
+
+  get bsConfig(): any {
+    return {
+      adaptivePosition: true,
+      isAnimated: true,
+      containerClass: 'theme-default',
+      showWeekNumbers: false,
+      dateInputFormat: 'DD-MM-YYYY hh:mm a'
+    }
+  }
+
   public resetForm(event: any): void {
     event.preventDefault();
     this.form.reset();
@@ -62,21 +77,28 @@ export class EventoDetalheComponent implements OnInit {
       telefone: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       imagemURL: new FormControl('', Validators.required),
+      lotes: this.fb.array([])
     })
   }
 
-  public cssValidator(formCampo: FormControl): any {
-    return { 'is-invalid': formCampo.errors && formCampo.touched };
+  // @ Métodos para lotes
+  adicionarLote(): void {
+    this.lotes.push(this.criarLote({id: 0} as Lote));
   }
 
-  get bsConfig(): any {
-    return {
-      adaptivePosition: true,
-      isAnimated: true,
-      containerClass: 'theme-default',
-      showWeekNumbers: false,
-      dateInputFormat: 'DD-MM-YYYY hh:mm a'
-    }
+  criarLote(lote: Lote): FormGroup{
+    return this.fb.group({
+      id: [lote.id],
+      nome: [lote.nome , Validators.required],
+      quantidade: [lote.quantidade , Validators.required],
+      preço: [lote.preço , Validators.required],
+      dataInicio: [lote.dataInicio],
+      dataFim: [lote.dataFim]
+    })
+  }
+
+  public cssValidator(formCampo: FormControl | AbstractControl): any {
+    return { 'is-invalid': formCampo.errors && formCampo.touched };
   }
 
   //pegando dados do formulário de acordo com o id passado
@@ -99,7 +121,7 @@ export class EventoDetalheComponent implements OnInit {
           this.toastr.error('Erro ao tentar carregar evento');
         }
       }
-      ).add(()=>{this.spinner.hide();});
+      ).add(() => { this.spinner.hide(); });
     }
   }
 
@@ -108,8 +130,8 @@ export class EventoDetalheComponent implements OnInit {
     if (this.form.valid) {
 
       this.evento = (this.mode === 'post')
-                  ? this.evento = { ...this.form.value }
-                  : this.evento = { id: this.evento.id, ...this.form.value };
+        ? this.evento = { ...this.form.value }
+        : this.evento = { id: this.evento.id, ...this.form.value };
 
       this.eventoService[this.mode](this.evento).subscribe(
 
@@ -129,4 +151,6 @@ export class EventoDetalheComponent implements OnInit {
 
     }
   }
+
+
 }
