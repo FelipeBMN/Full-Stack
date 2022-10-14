@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dotnetWebApi.Persistence.Contextos;
 
 namespace dotnetWebApi.Persistence.Migrations
 {
     [DbContext(typeof(dotnetWebAPIContext))]
-    partial class dotnetWebAPIContextModelSnapshot : ModelSnapshot
+    [Migration("20221013224251_Adicionando-Identity")]
+    partial class AdicionandoIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

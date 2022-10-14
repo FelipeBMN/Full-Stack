@@ -38,8 +38,8 @@ namespace dotnetWebApi.Persistence
             }
 
             query = query.AsNoTracking().OrderBy(p => p.Id)
-            .Where(p => p.Name.ToLower()
-            .Contains(nome.ToLower()));
+            .Where(p => p.User.FirstName.ToLower()
+            .Contains(nome.ToLower()) || p.User.LastName.ToLower().Contains(nome.ToLower()));
 
             return await query.ToArrayAsync();
         }
