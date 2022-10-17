@@ -9,8 +9,8 @@ using dotnetWebApi.Persistence.Contextos;
 namespace dotnetWebApi.Persistence.Migrations
 {
     [DbContext(typeof(dotnetWebAPIContext))]
-    [Migration("20221013224251_Adicionando-Identity")]
-    partial class AdicionandoIdentity
+    [Migration("20221016235708_Update-Identity")]
+    partial class UpdateIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -347,16 +347,11 @@ namespace dotnetWebApi.Persistence.Migrations
                     b.Property<string>("URL")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.HasIndex("EventId");
 
                     b.HasIndex("PalestranteId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("RedeSocials");
                 });
@@ -480,16 +475,9 @@ namespace dotnetWebApi.Persistence.Migrations
                         .HasForeignKey("PalestranteId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("dotnetWebApi.Domain.Identity.User", "User")
-                        .WithMany("RedesSociais")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.Navigation("Event");
 
                     b.Navigation("Palestrante");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("dotnetWebApi.Domain.Event", b =>
@@ -508,8 +496,6 @@ namespace dotnetWebApi.Persistence.Migrations
 
             modelBuilder.Entity("dotnetWebApi.Domain.Identity.User", b =>
                 {
-                    b.Navigation("RedesSociais");
-
                     b.Navigation("UserRoles");
                 });
 

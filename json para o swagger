@@ -1,8 +1,8 @@
 {
 	"local":"Belo Horizonte",
-	"DataEvento": "2021-02-17T21:40:35.159",
+	"DataEvent": "2021-02-17T21:40:35.159",
 	"Tema": "Angular",
-	"QtdPessoas": 200,
+	"Quantidade": 200,
 	"ImagemUrl": "img1.jpg",
 	"Telefone": "31978456652",
 	"Email": "angular@angular.com.br",

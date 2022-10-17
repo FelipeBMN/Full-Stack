@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace dotnetWebApi.Persistence.Migrations
 {
-    public partial class AdicionandoIdentity : Migration
+    public partial class UpdateIdentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -263,18 +263,11 @@ namespace dotnetWebApi.Persistence.Migrations
                     Nome = table.Column<string>(type: "TEXT", nullable: true),
                     URL = table.Column<string>(type: "TEXT", nullable: true),
                     EventId = table.Column<int>(type: "INTEGER", nullable: true),
-                    PalestranteId = table.Column<int>(type: "INTEGER", nullable: true),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: true)
+                    PalestranteId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RedeSocials", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RedeSocials_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_RedeSocials_Events_EventId",
                         column: x => x.EventId,
@@ -355,11 +348,6 @@ namespace dotnetWebApi.Persistence.Migrations
                 name: "IX_RedeSocials_PalestranteId",
                 table: "RedeSocials",
                 column: "PalestranteId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RedeSocials_UserId",
-                table: "RedeSocials",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

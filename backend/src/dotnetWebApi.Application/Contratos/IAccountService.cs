@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using dotnetWebApi.Application.Dtos;
+using Microsoft.AspNetCore.Identity;
 
 namespace dotnetWebApi.Application.Contratos
 {
@@ -9,8 +11,8 @@ namespace dotnetWebApi.Application.Contratos
     {
         Task<bool> UserExists(string userName);
         Task<UserUpdateDto> GetUserByUserNameAsync(string userName);
-        Task<SingInResult> CheckUserPasswordAsync(UserUpdateDto userUpdateDtop, string password);
-        Task<UserDto> CreatingAccountAsync(UnobservedTaskExceptionEventArgs userDto);
+        Task<SignInResult> CheckUserPasswordAsync(UserUpdateDto userUpdateDtop, string password);
+        Task<UserDto> CreatingAccountAsync(UserDto userDto);
         Task<UserUpdateDto> UpdateAccount (UserUpdateDto userUpdateDto);
     }
 }

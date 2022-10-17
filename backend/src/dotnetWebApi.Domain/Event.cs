@@ -12,7 +12,6 @@ namespace dotnetWebApi.Domain
     //[Table("EventosDetalhes")]
     public class Event
     {
-        [Key]
         public int Id { get; set; }
         public string Local { get; set; }
         public DateTime? DataEvent { get; set; }

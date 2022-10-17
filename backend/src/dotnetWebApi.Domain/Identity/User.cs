@@ -16,8 +16,6 @@ namespace dotnetWebApi.Domain.Identity
         public Degree Degree { get; set; }
         public Occupation occupation { get; set; }
         public string ImageUrl { get; set; }
-        public List<UserRole> UserRoles { get; set; }
-        public IEnumerable<RedeSocial> RedesSociais { get; set; }
-
+        public IEnumerable<UserRole> UserRoles { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace dotnetWebApi.Persistence
 
         public async Task<User> GetUserByUserNameAsync(string userName)
         {
-            return await this.context.Users.SingleOrDefaultAsync(user => user.UserName == userName.ToLower());
+            return await this.context.Users.SingleOrDefaultAsync(user => user.UserName.ToLower() == userName.ToLower());
         }
 
     }

@@ -16,8 +16,5 @@ namespace dotnetWebApi.Domain
         public Event Event { get; set; }
         public int? PalestranteId { get; set; }
         public Palestrante Palestrante { get; set; }
-        public int? UserId { get; set; }
-        public User User { get; set; }
-
     }
 }

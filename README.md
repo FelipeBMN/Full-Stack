@@ -28,9 +28,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 {
     "local": "São Paulo",
-    "dataEvento": "2021-02-17T23:21:36.698",
+    "dataEvent": "2021-02-17T23:21:36.698",
     "tema": "Angular 11 e suas novidades",
-    "qtdPessoas": 350,
+    "quantidade": 350,
     "imagemURL": "foto2.png",
     "telefone": "3214564887",
     "email": "angularbh@angular.com",

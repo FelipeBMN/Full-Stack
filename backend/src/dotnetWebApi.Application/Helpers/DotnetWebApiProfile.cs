@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using dotnetWebApi.Application.Dtos;
 using dotnetWebApi.Domain;
+using dotnetWebApi.Domain.Identity;
 
 namespace dotnetWebApi.API.Helpers
 {
@@ -15,6 +16,9 @@ namespace dotnetWebApi.API.Helpers
             CreateMap<Lote, LoteDto>().ReverseMap();
             CreateMap<RedeSocial, RedeSocialDto>().ReverseMap();
             CreateMap<Palestrante, PalestranteDto>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<User, UserLoginDto>().ReverseMap();
+            CreateMap<User, UserUpdateDto>().ReverseMap();
         }
     }
 }
