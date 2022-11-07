@@ -12,7 +12,7 @@ import { take } from 'rxjs/operators';
 )
 export class EventoService {
 
-  baseURL = 'https://localhost:5001/Events';
+  baseURL = 'https://localhost:5001/api/Eventos';
 
   constructor(private http: HttpClient) { }
 
@@ -22,9 +22,9 @@ export class EventoService {
     return this.http.get<Evento[]>(this.baseURL).pipe(take(1));
   }
 
-  getEventosByTema(tema: string): Observable<Evento[]> {
-    return this.http.get<Evento[]>(`${this.baseURL}/${tema}/tema`).pipe(take(1));
-  }
+  // getEventosByTema(tema: string): Observable<Evento[]> {
+  //   return this.http.get<Evento[]>(`${this.baseURL}/${tema}/tema`).pipe(take(1));
+  // }
 
   getEventoById(id: number): Observable<Evento> {
     return this.http.get<Evento>(`${this.baseURL}/${id}`).pipe(take(1));
